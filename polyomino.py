@@ -1,7 +1,4 @@
-from pympler.tracker import SummaryTracker
-import mem_top
 import sys
-tracker = SummaryTracker()
 
 import functools as _ft
 

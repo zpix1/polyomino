@@ -8,7 +8,8 @@ import parser
 from polyomino import free
 t = Terminal()
 
-pols = list(map(list, parser.load('part.pol').transforms()))#
+#pols = list(map(list, parser.load('part.pol').transforms()))#
+pols = gn.get(n)
 print()
 size = 10
 
