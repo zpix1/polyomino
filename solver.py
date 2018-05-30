@@ -6,18 +6,20 @@ import itertools
 def _generate_x_y(figure, pols):
     creatures = []
     xfigure = defaultdict(set)
-
     for index, pol in enumerate(pols):
-        for cell in figure:
-            for pol_cell in pol:
-                if (cell[0] + pol_cell[0], cell[1] + pol_cell[1]) not in figure:
-                    break
-            else:
-                s = []
+        for i in range(figure.shape[0]):
+            for j in range(figure.shape[1]):
+                cell = (i, j)
                 for pol_cell in pol:
-                    s.append((cell[0] + pol_cell[0], cell[1] + pol_cell[1]))
-                    xfigure[(cell[0] + pol_cell[0], cell[1] + pol_cell[1])].add(len(creatures))
-                creatures.append(s)
+                    # print(pol_cell, cell)
+                    if (cell[0] + pol_cell[0], cell[1] + pol_cell[1]) not in figure:
+                        break
+                else:
+                    s = []
+                    for pol_cell in pol:
+                        s.append((cell[0] + pol_cell[0], cell[1] + pol_cell[1]))
+                        xfigure[(cell[0] + pol_cell[0], cell[1] + pol_cell[1])].add(len(creatures))
+                    creatures.append(s)
 
     Y = {}
     for index, pol in enumerate(creatures):
