@@ -25,8 +25,8 @@ def _generate_x_y(figure, pols):
 
     return (xfigure, Y)
 
-def _solution_generator(figure,pols):
-    X,Y = _generate_x_y(figure,pols)
+def _solution_generator(figure, pols):
+    X,Y = _generate_x_y(figure, pols)
     for solution in dl.solve(X,Y):
         # print(solution)
         ans = []
@@ -37,6 +37,10 @@ def _solution_generator(figure,pols):
         if ans == []:
             raise StopIteration
         yield ans
+
+def split_into_parts(figure, part):
+    pols = set(part.transforms())
+    return _solution_generator(figure, pols)
 
 def polyomino_split(figure, n):
     """
