@@ -49,7 +49,7 @@ figure = parser.load('figure.pol')
 # XXXX
 # XXXX
 
-# auto_congruent_polyomino_split will do all for you
+# auto_congruent_polyomino_split will do all work for you
 for idx, s in enumerate(solver.auto_congruent_polyomino_split(figure, 4)):
     parser.save_solution_to_svg(s, str(idx)+'th_sol.svg')
     parser.pretty_print_solution(s)
