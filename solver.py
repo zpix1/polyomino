@@ -19,7 +19,6 @@ def _generate_x_y(figure, pols):
                     xfigure[(cell[0] + pol_cell[0], cell[1] + pol_cell[1])].add(len(creatures))
                 creatures.append(s)
 
-
     Y = {}
     for index, pol in enumerate(creatures):
         Y[index] = pol
@@ -48,7 +47,7 @@ def polyomino_split(figure, n):
 
     return _solution_generator(figure, pols)
 
-def congruent_polyomino_split(figure, n):
+def auto_congruent_polyomino_split(figure, n):
     """
     Split given `figure` to congruent polyominos of size `n`.
     """
@@ -58,5 +57,37 @@ def congruent_polyomino_split(figure, n):
     # print(zip(*ans)
     return itertools.chain(*ans)
 
+def congruent_polyomino_plat_split(polyomino):
+    """
+    Split endless flat to given polyominos. (DOES NOT WORK)
+    """
 
-    
+    n = 3
+    creatures = []
+    xfigure = defaultdict(set)
+    figure = [ (x//n, x%n) for x in range(n*n)]
+    # print(figure)
+    for index, pol in enumerate(polyomino.transforms()):
+        for cell in figure:
+            
+            s = []
+            for pol_cell in pol:
+                if (cell[0] + pol_cell[0], cell[1] + pol_cell[1]) in figure:
+                    s.append((cell[0] + pol_cell[0], cell[1] + pol_cell[1]))
+                    xfigure[(cell[0] + pol_cell[0], cell[1] + pol_cell[1])].add(len(creatures))
+            creatures.append(s)
+
+
+    Y = {}
+    for index, pol in enumerate(creatures):
+        Y[index] = pol
+
+    print(xfigure)
+    for solution in dl.solve(xfigure,Y):
+        ans = []
+        for pol_id in solution:
+            ans.append(pm.Polyomino(Y[pol_id]))
+
+        if ans == []:
+            raise StopIteration
+        yield ans

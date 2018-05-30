@@ -2,8 +2,6 @@ import svgwrite
 
 from polyomino import Polyomino
 
-def _console_color(text, index):
-    return '\033[48;5;{}m{}\033[0m'.format(index+1, text)
 _colors = [
     (60, 180, 75),
     (255, 225, 25),
@@ -24,6 +22,10 @@ _colors = [
     (0, 0, 128),
     (128, 128, 128)
 ]
+
+def _console_color(text, index):
+    return '\033[48;5;{}m{}\033[0m'.format(index+1, text)
+
 def _svg_color(index):
     if index == -1:
         return 'white'
